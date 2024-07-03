@@ -4,7 +4,6 @@ import {
   Dialog,
   DialogContent,
   DialogHeader,
-  DialogTitle,
   DialogTrigger,
 } from "../components/ui/dialog";
 import { useNavigate } from "react-router-dom";
@@ -113,7 +112,6 @@ const Home = () => {
         </DialogTrigger>
         <DialogContent className="p-6 rounded-md shadow-lg bg-gray-200">
           <DialogHeader>
-            <DialogTitle className="text-2xl font-bold text-green-700">Transaction add successfully</DialogTitle>
           </DialogHeader>
           <TransactionForm />
         </DialogContent>
