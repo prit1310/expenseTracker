@@ -3,7 +3,6 @@ import TransactionForm from "../components/molecules/transactionForm";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -112,12 +111,9 @@ const Home = () => {
             New Transaction
           </Button>
         </DialogTrigger>
-        <DialogContent className="bg-white p-6 rounded-md shadow-lg">
+        <DialogContent className="p-6 rounded-md shadow-lg bg-gray-200">
           <DialogHeader>
-            <DialogTitle className="text-xl font-bold">Add Transaction</DialogTitle>
-            <DialogDescription className="text-sm text-gray-600">
-              Manage your finances, keep update your transaction
-            </DialogDescription>
+            <DialogTitle className="text-2xl font-bold text-green-700">Transaction add successfully</DialogTitle>
           </DialogHeader>
           <TransactionForm />
         </DialogContent>

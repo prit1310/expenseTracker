@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -7,7 +8,7 @@ import { Input } from "../ui/input";
 import { auth, db } from "../../lib/firebase";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 import { addDoc, collection } from "firebase/firestore";
-import backGroundTransaction from "../../assets/transactionBack.jpg";
+import backImgForm from "../../assets/formback.webp"
 
 const formSchema = z.object({
   title: z.string().min(2, {
@@ -19,6 +20,8 @@ const formSchema = z.object({
 });
 
 const TransactionForm = () => {
+  const [formClosed, setFormClosed] = useState(false);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -42,17 +45,19 @@ const TransactionForm = () => {
       });
 
       console.log(docRef);
+      setFormClosed(true);
     } catch (error) {
       console.error("Error adding document: ", error);
     }
   }
 
+  if (formClosed) {
+    return null;
+  }
+
   return (
-    <div
-      className="min-h-full bg-cover bg-center flex items-center justify-center py-10"
-      style={{ backgroundImage: `url(${backGroundTransaction})` }}
-    >
-      <div className="bg-white bg-opacity-90 p-8 rounded-lg shadow-lg max-w-lg w-full mb-16">
+    <>
+      <div className="p-9 rounded-lg shadow-lg max-w-lg w-full mb-16 bg-cover text-white" style={{backgroundImage:`URL(${backImgForm})`}}>
         <h2 className="text-2xl font-semibold text-center mb-4">Add New Transaction</h2>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 flex flex-col">
@@ -149,7 +154,7 @@ const TransactionForm = () => {
           </form>
         </Form>
       </div>
-    </div>
+    </>
   );
 };
 

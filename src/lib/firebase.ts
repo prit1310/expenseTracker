@@ -3,12 +3,12 @@ import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCedBnLphHtuM_OdjhBPakRSu82LwIalFQ",
-  authDomain: "expense-traker-5bde6.firebaseapp.com",
-  projectId: "expense-traker-5bde6",
-  storageBucket: "expense-traker-5bde6.appspot.com",
-  messagingSenderId: "398071464367",
-  appId: "1:398071464367:web:52985e02ef5def2e262f5a"
+  apiKey: "AIzaSyAK8tyIsp8TeYoHlP451tad3ArtHh9H55U",
+  authDomain: "expense-tracker-76ba0.firebaseapp.com",
+  projectId: "expense-tracker-76ba0",
+  storageBucket: "expense-tracker-76ba0.appspot.com",
+  messagingSenderId: "972278010028",
+  appId: "1:972278010028:web:ef49e4e3f8f7993a084f09"
 };
 
 const app = initializeApp(firebaseConfig);
