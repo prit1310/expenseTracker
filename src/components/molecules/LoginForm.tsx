@@ -6,7 +6,7 @@ import { FormField, FormItem, FormLabel, FormControl, FormMessage, Form } from "
 import { Input } from "../ui/input";
 import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, signInWithPopup ,GoogleAuthProvider} from "firebase/auth";
 import { auth } from "../../lib/firebase";
 import { useNavigate } from "react-router-dom";
 import { useStore } from "../../store";
@@ -17,6 +17,8 @@ const formSchema = z.object({
   }),
   password: z.string(),
 });
+
+const provider = new GoogleAuthProvider();
 
 const LoginForm = () => {
   const {logIn,loggedIn}:any = useStore()
@@ -45,6 +47,15 @@ const LoginForm = () => {
         location.reload();
       });
   }
+
+  async function signInWithGoogle(){
+    signInWithPopup(auth,provider).then(
+     ()=>{
+      logIn()
+       navigate("/")
+     }
+    )
+ }
 
   console.log(loggedIn)
   return (
@@ -86,6 +97,9 @@ const LoginForm = () => {
           />
           <Button type="submit" className="w-full bg-purple-600 text-white font-bold hover:bg-purple-500">
             Login
+          </Button>
+          <Button className="w-full bg-blue-700 font-bold text-white hover:bg-blue-500" onClick={signInWithGoogle}>
+            Sign In With Google
           </Button>
         </form>
     </Form>
