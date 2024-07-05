@@ -7,34 +7,34 @@ import {
   DialogTrigger,
 } from "../components/ui/dialog";
 import { useNavigate } from "react-router-dom";
-import { collection, getDocs, query, where} from "firebase/firestore";
+import { collection, getDocs, query, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db, auth } from "../lib/firebase";
 import DataTableDemo, { Payment } from "./DataPage";
 import backGroundImage from "../assets/background1.jpg";
 import backGroundImage1 from "../assets/mainBack.jpg";
 import { Avatar, AvatarFallback, AvatarImage } from "../components/ui/avatar"
-import {useStore} from "../store"
+import { useStore } from "../store"
 import { signOut } from "firebase/auth";
 
 const Home = () => {
   const navigate = useNavigate();
-  const [transactionList,setTransactionList] = useState([{
+  const [transactionList, setTransactionList] = useState([{
     amount: "",
     description: "",
     title: "",
     transactionType: "",
-    uid:""            
-}])
+    uid: ""
+  }])
 
   function handleClick() {
     setMenuOpen(!menuOpen);
   }
 
-  function logout(){
+  function logout() {
     logOut()
     signOut(auth).then(
-      ()=>navigate('/login')
+      () => navigate('/login')
     )
   }
 
@@ -42,18 +42,18 @@ const Home = () => {
     const querySnapshot = await getDocs(
       query(collection(db, "transactions"), where("uid", "==", uid))
     );
-    let list:any = [];
+    let list: any = [];
     querySnapshot.forEach((doc) => {
       list.push(doc.data());
     });
     setTransactionList(list);
   }
 
-  const {loggedIn,logOut}:any = useStore()
+  const { loggedIn, logOut }: any = useStore()
   const [email, setEmail] = useState<string | null>(null);
 
   useEffect(() => {
-    if(!loggedIn){
+    if (!loggedIn) {
       navigate("/login")
     }
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -89,14 +89,14 @@ const Home = () => {
       className="min-h-screen bg-cover bg-center"
       style={{ backgroundImage: `url(${backGroundImage1})` }}
     >
-      <div className="flex items-center py-4 bg-white bg-opacity-80 shadow-md"  style={{ backgroundImage: `url(${backGroundImage})` }}>
-          <h1 className="text-lg sm:text-xl font-bold ml-4 flex-grow">Expense Tracker</h1>
+      <div className="flex items-center py-4 bg-white bg-opacity-80 shadow-md" style={{ backgroundImage: `url(${backGroundImage})` }}>
+        <h1 className="text-lg sm:text-xl font-bold ml-4 flex-grow">Expense Tracker</h1>
         <div className="flex items-center">
-            <h3 className="text-sm sm:text-base font-semibold">{email}</h3>
-              <Avatar className="ml-2 hover:cursor-pointer" onClick={handleClick}>
-                  <AvatarImage src="https://github.com/shadcn.png" loading="lazy" />
-                  <AvatarFallback>LOGOUT</AvatarFallback>
-              </Avatar>
+          <h3 className="text-sm sm:text-base font-semibold">{email}</h3>
+          <Avatar className="ml-2 hover:cursor-pointer" onClick={handleClick}>
+            <AvatarImage src="https://github.com/shadcn.png" loading="lazy" />
+            <AvatarFallback>LOGOUT</AvatarFallback>
+          </Avatar>
         </div>
         {menuOpen && (
           <div className="ml-2">
