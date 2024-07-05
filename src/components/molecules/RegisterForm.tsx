@@ -61,9 +61,10 @@ const RegisterForm = () => {
             <FormItem>
               <FormLabel>Password:</FormLabel>
               <FormControl>
-              <div className="flex items-center">
-            <Input placeholder="" {...field} type={visibility} className="mr-2"/>
-            <Button onClick={() => setVisibility(visibility === "password" ? "text" : "password")}>
+              <div className="flex items-center justify-center">
+            <Input placeholder="" {...field} type={visibility} className="mr-2 w-96"/>
+            <Button onClick={() => setVisibility(visibility === "password" ? "text" : "password")}
+              className="-ml-16 cursor-pointer">
               {visibility === "password" ? <Eye /> : <EyeOff />}
             </Button>
           </div>
@@ -79,9 +80,10 @@ const RegisterForm = () => {
             <FormItem>
               <FormLabel>Confirnm Password:</FormLabel>
               <FormControl>
-              <div className="flex items-center">
-            <Input placeholder="" {...field} type={visibility} className="mr-2"/>
-            <Button onClick={() => setVisibility(visibility === "password" ? "text" : "password")}>
+              <div className="flex items-center justify-center">
+            <Input placeholder="" {...field} type={visibility} className="mr-2 w-96"/>
+            <Button onClick={() => setVisibility(visibility === "password" ? "text" : "password")}
+              className="-ml-16 cursor-pointer">
               {visibility === "password" ? <Eye /> : <EyeOff />}
             </Button>
           </div>

@@ -81,11 +81,12 @@ const LoginForm = () => {
               <FormItem>
                 <FormLabel>Password:</FormLabel>
                 <FormControl>
-                  <div className="flex items-center">
-                    <Input placeholder="" {...field} type={visibility} className="mr-2" />
+                  <div className="flex items-center justify-center">
+                    <Input placeholder="" {...field} type={visibility} className="mr-2 w-96" />
                     <Button
                       type="button"
                       onClick={() => setVisibility(visibility === "password" ? "text" : "password")}
+                      className="-ml-16 cursor-pointer"
                     >
                       {visibility === "password" ? <Eye /> : <EyeOff />}
                     </Button>

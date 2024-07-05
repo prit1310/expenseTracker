@@ -7,7 +7,7 @@ import {
   DialogTrigger,
 } from "../components/ui/dialog";
 import { useNavigate } from "react-router-dom";
-import { collection, getDocs, query, where } from "firebase/firestore";
+import { collection, getDocs, query, where} from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db, auth } from "../lib/firebase";
 import DataTableDemo, { Payment } from "./DataPage";
