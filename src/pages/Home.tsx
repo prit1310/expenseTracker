@@ -53,6 +53,12 @@ const Home = () => {
   const [email, setEmail] = useState<string | null>(null);
 
   useEffect(() => {
+
+    window.addEventListener('beforeunload',(event)=>{
+        event.preventDefault()
+        event.returnValue = ''
+    })
+
     if (!loggedIn) {
       navigate("/login")
     }
