@@ -16,6 +16,7 @@ import backGroundImage1 from "../assets/mainBack.jpg";
 import { Avatar, AvatarFallback, AvatarImage } from "../components/ui/avatar"
 import { useStore } from "../store"
 import { signOut } from "firebase/auth";
+import logo from "../assets/logo.png"
 
 const Home = () => {
   const navigate = useNavigate();
@@ -96,7 +97,7 @@ const Home = () => {
       style={{ backgroundImage: `url(${backGroundImage1})` }}
     >
       <div className="flex items-center py-4 bg-white bg-opacity-80 shadow-md" style={{ backgroundImage: `url(${backGroundImage})` }}>
-        <h1 className="text-lg sm:text-xl font-bold ml-4 flex-grow">Expense Tracker</h1>
+        <h1 className="text-lg sm:text-xl font-bold ml-4 flex-grow"><img src={logo} alt="Expense Tracker" loading="lazy" className="h-14"/></h1>
         <div className="flex items-center">
           <h3 className="text-sm sm:text-base font-semibold">{email}</h3>
           <Avatar className="ml-2 hover:cursor-pointer" onClick={handleClick}>
