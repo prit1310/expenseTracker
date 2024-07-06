@@ -11,16 +11,13 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { ChevronDown, MoreHorizontal } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 
 import { Button } from "../components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../components/ui/dropdown-menu";
 import { Input } from "../components/ui/input";
@@ -33,6 +30,8 @@ import {
   TableHeader,
   TableRow,
 } from "../components/ui/table";
+import { deleteDoc, doc } from "firebase/firestore";
+import { db } from "../lib/firebase";
 
 export type Payment = {
   amount: string;
@@ -41,6 +40,10 @@ export type Payment = {
   transactionType: string;
 };
 
+async function deleteTransaction(title:any){
+  await deleteDoc(doc(db, "transactions", title));
+  console.log(`delete ${title}`)
+}
 export const columns: ColumnDef<Payment>[] = [
   {
     accessorKey: "title",
@@ -80,38 +83,10 @@ export const columns: ColumnDef<Payment>[] = [
     id: "actions",
     enableHiding: false,
     cell: ({ row }) => {
-      const payment = row.original;
+      const title = row.original.title;
 
       return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="relative p-2 text-gray-700 hover:text-gray-900 focus:outline-none">
-              <span className="sr-only">Open menu</span>
-              <MoreHorizontal className="w-5 h-5" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent
-            align="end"
-            className="w-48 bg-white shadow-lg ring-1 ring-black ring-opacity-5 rounded-md overflow-hidden"
-          >
-            <DropdownMenuLabel className="px-4 py-2 text-sm font-semibold text-gray-900 bg-gray-50 border-b border-gray-200">
-              Actions
-            </DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(payment.title)}
-              className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
-            >
-              Copy title
-            </DropdownMenuItem>
-            <DropdownMenuSeparator className="border-t border-gray-200" />
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(payment.amount)}
-              className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
-            >
-              Copy amount
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <Button className="bg-red-600 text-white hover:bg-red-500" onClick={()=>deleteTransaction(title)}>Delete</Button>
 
       );
     },

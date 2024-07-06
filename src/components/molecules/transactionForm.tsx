@@ -6,7 +6,7 @@ import { FormField, FormItem, FormLabel, FormControl, FormMessage, Form } from "
 import { Input } from "../ui/input";
 import { auth, db } from "../../lib/firebase";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
-import { addDoc, collection } from "firebase/firestore";
+import {doc,setDoc } from "firebase/firestore";
 import backImgForm from "../../assets/formback.webp"
 import {DialogClose} from "../ui/dialog"
 
@@ -34,7 +34,7 @@ const TransactionForm = () => {
     console.log(values, auth.currentUser);
 
     try {
-      const docRef = await addDoc(collection(db, "transactions"), {
+      const docRef = await setDoc(doc(db, "transactions",values.title), {
         uid: auth.currentUser?.uid,
         title: values.title,
         description: values.description,
