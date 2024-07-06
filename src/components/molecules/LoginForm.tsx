@@ -5,7 +5,7 @@ import { Button } from "../ui/button";
 import { FormField, FormItem, FormLabel, FormControl, FormMessage, Form } from "../ui/form";
 import { Input } from "../ui/input";
 import { Eye, EyeOff } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { signInWithEmailAndPassword, signInWithPopup ,GoogleAuthProvider} from "firebase/auth";
 import { auth } from "../../lib/firebase";
 import { useNavigate } from "react-router-dom";
@@ -56,8 +56,10 @@ const LoginForm = () => {
      }
     )
  }
+  useEffect(()=>{
+    console.log(loggedIn)
+  },[])
 
-  console.log(loggedIn)
   return (
     <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
